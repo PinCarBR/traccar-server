@@ -1,0 +1,18 @@
+version: "3"
+services:
+    db:
+        image: mysql:8.0.13
+        container_name: db
+        restart: always
+        environment:
+            MYSQL_USER: ***REMOVED***
+            MYSQL_ROOT_PASSWORD: ***REMOVED***
+            MYSQL_PASSWORD: ***REMOVED***
+            MYSQL_DATABASE: ***REMOVED***
+        volumes:
+            - db-datavolume:/var/lib/mysql
+            - ./mysql:/etc/mysql/conf.d
+        ports:
+            - "3306:3306"
+volumes:
+    db-datavolume:
