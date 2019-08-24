@@ -36,11 +36,11 @@ docker-ce:
 - For more info, visit: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 ### Install Docker Compose
 1. We'll check the current release and if necessary, update it in the command below:  
-`sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose`
+`ssudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
 2. Next we'll set the permissions:  
 `sudo chmod +x /usr/local/bin/docker-compose`
 3. Then we'll verify that the installation was successful by checking the version:  
-`docker-compose --version`
+`docker-compose -v`
 
 - For more info, visit: https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-16-04
 ### Install the repository into the VPS
@@ -60,10 +60,8 @@ docker-ce:
 `cd low_mem_mysql`
 2. Run the MySQL database:  
 `docker-compose up -d`
-3. Transfer the last backup to the database:  
-`cat ~/backup.sql | docker exec -i db /usr/bin/mysql -u user --password=password database`
-### Run the complete set of services
-1. Step into the working tree destination folder:  
 2. Check if everything is working via the commands:  
 `docker-compose ps` or `docker ps`  
 `docker-compose logs`
+3. Transfer the last backup to the database:  
+`cat ~/backup.sql | docker exec -i db /usr/bin/mysql -u user --password=password database`
