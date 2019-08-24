@@ -5,10 +5,10 @@ services:
         container_name: db
         restart: always
         environment:
-            MYSQL_USER: ***REMOVED***
-            MYSQL_ROOT_PASSWORD: ***REMOVED***
-            MYSQL_PASSWORD: ***REMOVED***
-            MYSQL_DATABASE: ***REMOVED***
+            MYSQL_USER: ${MYSQL_USER} 
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
         volumes:
             - db-datavolume:/var/lib/mysql
             - ./mysql:/etc/mysql/conf.d

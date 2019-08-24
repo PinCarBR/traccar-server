@@ -1,5 +1,5 @@
 # low_mem_mysql
-This is the repository with a docker-compose file and a mySQL configuration file to run mySQL on low VPS.
+This is the repository with a docker-compose file and a mySQL configuration file to run mySQL on a low memory VPS.
 ## Recomended VPS configuration
 - OS: Ubuntu 16.04 x64
 - RAM: 512 MB
@@ -58,6 +58,10 @@ docker-ce:
 `ssh user@VPS_ip`
 2. Step into the clonned repository:  
 `cd low_mem_mysql`
+2. Set your mysql username and password parameters as environment variables:  
+`export MYSQL_USER=YOUR_USERNAME` `export MYSQL_ROOT_PASSWORD=YOUR_ROOT_PASSWORD` `export MYSQL_PASSWORD=YOUR_USER_PASSWORD` `export MYSQL_DATABASE=YOUR_DATABASE_NAME`
+2. Alternatively you can set all these variables in .env file and export all at once:  
+`export $(<.env)`
 2. Run the MySQL database:  
 `docker-compose up -d`
 2. Check if everything is working via the commands:  
@@ -65,3 +69,6 @@ docker-ce:
 `docker-compose logs`
 3. Transfer the last backup to the database:  
 `cat ~/backup.sql | docker exec -i db /usr/bin/mysql -u user --password=password database`
+3. To Transfer the last backup to the database:  
+`docker exec -it db bash`  
+`mysql -uUSER_NAME -p`
