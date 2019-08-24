@@ -60,8 +60,8 @@ docker-ce:
 `cd low_mem_mysql`
 2. Set your mysql username and password parameters as environment variables:  
 `export MYSQL_USER=YOUR_USERNAME` `export MYSQL_ROOT_PASSWORD=YOUR_ROOT_PASSWORD` `export MYSQL_PASSWORD=YOUR_USER_PASSWORD` `export MYSQL_DATABASE=YOUR_DATABASE_NAME`
-2. Alternatively you can set all these variables in .env file and export all at once:  
-`export $(<.env)`
+2. Alternatively you can set all these variables in .env file and export all at once on the system startup by adding the following command to your .bashrc:  
+`export $(<PATH_TO_THE_REPOSITORY/.env)`
 2. Run the MySQL database:  
 `docker-compose up -d`
 2. Check if everything is working via the commands:  
