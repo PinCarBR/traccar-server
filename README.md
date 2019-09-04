@@ -5,6 +5,7 @@ This is the repository with a docker-compose file and a mySQL configuration file
 - RAM: 512 MB
 - CPU: 1
 - Disk space: 10 GB
+- 1GB swap: see https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-16-04
 ## Setup Instructions
 ### Install Docker
 1. First, in order to ensure the downloads are valid, add the GPG key for the official Docker repository to your system:  
