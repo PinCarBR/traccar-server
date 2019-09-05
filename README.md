@@ -1,5 +1,5 @@
 # Traccar server
-This is the repository to create the traccar-server with a standalone MySQL database.
+This is the repository to create the traccar-server with a standalone MySQL database via docker-compose file.
 ## Minimum VPS configuration
 - OS: Ubuntu 16.04 x64
 - RAM: 512 MB
@@ -72,3 +72,8 @@ docker-ce:
 3. To Transfer the last backup to the database:  
 `docker exec -it db bash`  
 `mysql -uUSER_NAME -p`
+
+### Create the traccar configuration file
+1. Create a traccar.xml file with your configuration inside the folder `traccar/conf/`
+1. A sample configuration file is provided on `traccar/conf/sample_traccar.xml`
+1. For more details on the available options, pelase check: https://www.traccar.org/configuration-file/
