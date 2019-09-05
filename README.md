@@ -1,6 +1,6 @@
-# low_mem_mysql
-This is the repository with a docker-compose file and a mySQL configuration file to run mySQL on a low memory VPS.
-## Recomended VPS configuration
+# Traccar server
+This is the repository to create the traccar-server with a standalone MySQL database.
+## Minimum VPS configuration
 - OS: Ubuntu 16.04 x64
 - RAM: 512 MB
 - CPU: 1
@@ -46,11 +46,10 @@ docker-ce:
 - For more info, visit: https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-16-04
 ### Install the repository into the VPS
 1. Create a new directory in a common place:  
-`sudo mkdir /low_mem_mysql`
+`sudo mkdir /traccar-server`
 1. Step into the just created folder:  
-`cd /low_mem_mysql/`
-1. Clone the repository:  
-`git clone https://github.com/RafaelMiquelino/low_mem_mysql.git`
+`cd /traccar-server`
+1. Clone the repository.
 
 ### Restore the database
 1. In the machine and the respective folder where the backup is located, transfer the backup file to the VPS:  
@@ -58,7 +57,7 @@ docker-ce:
 2. Connect to the VPS via SSH:  
 `ssh user@VPS_ip`
 2. Step into the clonned repository:  
-`cd low_mem_mysql`
+`cd traccar-server`
 2. Set your mysql username and password parameters as environment variables:  
 `export MYSQL_USER=YOUR_USERNAME` `export MYSQL_ROOT_PASSWORD=YOUR_ROOT_PASSWORD` `export MYSQL_PASSWORD=YOUR_USER_PASSWORD` `export MYSQL_DATABASE=YOUR_DATABASE_NAME`
 2. Alternatively you can set all these variables in .env file and export all at once on the system startup by adding the following command to your .bashrc:  
