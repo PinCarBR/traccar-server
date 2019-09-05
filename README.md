@@ -51,29 +51,39 @@ docker-ce:
 `cd /traccar-server`
 1. Clone the repository.
 
+### Configure MySQL environment variables
+1. Set your mysql username and password parameters as environment variables:  
+`export MYSQL_USER=YOUR_USERNAME` `export MYSQL_ROOT_PASSWORD=YOUR_ROOT_PASSWORD` `export MYSQL_PASSWORD=YOUR_USER_PASSWORD` `export MYSQL_DATABASE=YOUR_DATABASE_NAME`
+2. Alternatively you can set all these variables in .env file and export all at once on the system startup by adding the following command to your .bashrc:  
+`export $(<PATH_TO_THE_REPOSITORY/.env)`
+
+### Create the traccar configuration file
+1. Create a `traccar.xml` file with your configuration inside the folder `traccar/conf/`
+1. A sample configuration file is provided on `traccar/conf/sample_traccar.xml`
+1. Replace `[DATABASE]` with your MySQL database name
+1. Replace `[USER]` with your MySQL username
+1. Replace `[PASSWORD]` with your MySQL passoword
+1. For more details on the available options fro traccar configuration file, pelase check: https://www.traccar.org/configuration-file/
+
 ### Restore the database
+#### IF YOU HAVE A DATABASE BACKUP, ENSURE YOU DO THIS BEFORE STARTING TRACCAR-SERVER
 1. In the machine and the respective folder where the backup is located, transfer the backup file to the VPS:  
 `rsync -avzhe ssh ./backup.sql user@VPS_ip:~/backup.sql`
 2. Connect to the VPS via SSH:  
 `ssh user@VPS_ip`
 2. Step into the clonned repository:  
 `cd traccar-server`
-2. Set your mysql username and password parameters as environment variables:  
-`export MYSQL_USER=YOUR_USERNAME` `export MYSQL_ROOT_PASSWORD=YOUR_ROOT_PASSWORD` `export MYSQL_PASSWORD=YOUR_USER_PASSWORD` `export MYSQL_DATABASE=YOUR_DATABASE_NAME`
-2. Alternatively you can set all these variables in .env file and export all at once on the system startup by adding the following command to your .bashrc:  
-`export $(<PATH_TO_THE_REPOSITORY/.env)`
 2. Run the MySQL database:  
-`docker-compose up -d`
+`docker-compose up -d db`
 2. Check if everything is working via the commands:  
 `docker-compose ps` or `docker ps`  
 `docker-compose logs`
 3. Transfer the last backup to the database:  
-`cat ~/backup.sql | docker exec -i db /usr/bin/mysql -u user --password=password database`
-3. To Transfer the last backup to the database:  
-`docker exec -it db bash`  
-`mysql -uUSER_NAME -p`
+`docker exec -i db sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"' < ~/backup.sql`
 
-### Create the traccar configuration file
-1. Create a traccar.xml file with your configuration inside the folder `traccar/conf/`
-1. A sample configuration file is provided on `traccar/conf/sample_traccar.xml`
-1. For more details on the available options, pelase check: https://www.traccar.org/configuration-file/
+### Execute all the services
+`docker-compose up -d` or `docker-compose up -d --build --force-recreate` to force recreation of image and container  
+Check if everything is working via the commands:  
+`docker-compose ps` or `docker ps`  
+`docker-compose logs`
+
