@@ -14,5 +14,17 @@ services:
             - ./mysql:/etc/mysql/conf.d
         ports:
             - "3306:3306"
+    traccar-server:
+        image: traccar/traccar:4.6
+        container_name: traccar-server
+        depends_on:
+            - db
+        restart: always
+        volumes:
+            - ./traccar/conf/traccar.xml:/opt/traccar/conf/traccar.xml:ro
+            - ./traccar/logs:/opt/traccar/logs:rw
+        ports:
+            - "8082:8082"
+            - "5000-5150:5000-5150"
 volumes:
     db-datavolume:
