@@ -45,11 +45,10 @@ docker-ce:
 
 - For more info, visit: https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-16-04
 ### Install the repository into the VPS
-1. Create a new directory in a common place:  
-`sudo mkdir /traccar-server`
-1. Step into the just created folder:  
-`cd /traccar-server`
 1. Clone the repository.
+1. Step into the just created folder 
+1. Change the traefik/acme.json file permission:
+`sudo chmod 600 traefik/acme.json`
 
 ### Configure MySQL environment variables
 1. Set your mysql username and password parameters as environment variables:  

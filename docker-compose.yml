@@ -14,6 +14,8 @@ services:
             - ./mysql:/etc/mysql/conf.d
         ports:
             - "3306:3306"
+        labels:
+            - traefik.enable=false
     traccar-server:
         image: traccar/traccar:4.6
         container_name: traccar-server
@@ -29,5 +31,25 @@ services:
         ports:
             - "8082:8082"
             - "5000-5150:5000-5150"
+        labels:
+            - traefik.frontend.rule=Host:***REMOVED***,www.***REMOVED***
+            - traefik.backend=traccar-server
+            - traefik.port=8082
+    traefik:
+        image: traefik:1.7
+        container_name: traefik
+        command: --docker
+        restart: always
+        ports:
+          - "80:80"
+          - "443:443"
+        labels:
+            - traefik.backend=traefik
+            - traefik.port=8080
+            - traefik.frontend.rule=Host:monitor.***REMOVED***
+        volumes:
+          - ./traefik/traefik.toml:/traefik.toml
+          - ./traefik/acme.json:/acme.json
+          - /var/run/docker.sock:/var/run/docker.sock
 volumes:
     db-datavolume:
