@@ -18,7 +18,7 @@ services:
             - traefik.enable=false
     traccar-server:
         image: traccar/traccar:4.6
-        container_name: traccar-server
+        container_name: traccar
         depends_on:
             - db
         restart: always
@@ -38,7 +38,7 @@ services:
             - traefik.port=8082
     traefik:
         image: traefik:1.7
-        container_name: traefik
+        container_name: rev-proxy
         command: --docker
         restart: always
         ports:
