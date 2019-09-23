@@ -1,5 +1,5 @@
 # Traccar server
-This is the repository to create the traccar-server with a standalone MySQL database via docker-compose file.
+This is the repository to create the traccar-server with a standalone MySQL database and Traefik reverse proxy via docker-compose file.
 ## Minimum VPS configuration
 - OS: Ubuntu 16.04 x64
 - RAM: 512 MB
@@ -47,13 +47,13 @@ docker-ce:
 ### Install the repository into the VPS
 1. Clone the repository.
 1. Step into the just created folder 
-1. Change the traefik/acme.json file permission:
-`sudo chmod 600 traefik/acme.json`
 
-### Configure MySQL environment variables
+### Configure environment variables
 1. Set your mysql username and password parameters as environment variables:  
 `export MYSQL_USER=YOUR_USERNAME` `export MYSQL_ROOT_PASSWORD=YOUR_ROOT_PASSWORD` `export MYSQL_PASSWORD=YOUR_USER_PASSWORD` `export MYSQL_DATABASE=YOUR_DATABASE_NAME`
-2. Alternatively you can set all these variables in .env file and export all at once on the system startup by adding the following command to your .bashrc:  
+2. Set your domain:  
+`export DOMAIN=YOUR_DOMAIN.com`
+2. Alternatively you can set all these variables in `.env` file and export all at once on the system startup by adding the following command to your .bashrc:  
 `export $(<PATH_TO_THE_REPOSITORY/.env)`
 
 ### Create the traccar configuration file
@@ -63,6 +63,11 @@ docker-ce:
 1. Replace `[USER]` with your MySQL username
 1. Replace `[PASSWORD]` with your MySQL passoword
 1. For more details on the available options fro traccar configuration file, pelase check: https://www.traccar.org/configuration-file/
+
+### Create the traefik configuration file
+1. Create a `traefik.toml` file with your configuration inside the folder `traefik/`
+1. A sample configuration file is provided on `traefik/traefik_sample.toml`. The standard login\username for the Web UI is admin\admin
+1. For configuration examples, including Let's Encrypt support please check https://docs.traefik.io/v1.7/user-guide/examples/
 
 ### Restore the database
 #### IF YOU HAVE A DATABASE BACKUP, ENSURE YOU DO THIS BEFORE STARTING TRACCAR-SERVER
@@ -84,5 +89,6 @@ docker-ce:
 `docker-compose up -d` or `docker-compose up -d --build --force-recreate` to force recreation of image and container  
 Check if everything is working via the commands:  
 `docker-compose ps` or `docker ps`  
-`docker-compose logs`
+Check the logs of each container via the command:  
+`docker-compose logs container_name`
 
