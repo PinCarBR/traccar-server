@@ -33,8 +33,8 @@ services:
             - "8082:8082"
             - "5000-5150:5000-5150"
         labels:
-            - traefik.frontend.rule=Host:***REMOVED***,www.***REMOVED***
-            - traefik.backend=traccar-server
+            - traefik.frontend.rule=Host:${DOMAIN},www.${DOMAIN}
+            - traefik.backend=traccar
             - traefik.port=8082
     traefik:
         image: traefik:1.7
@@ -47,7 +47,7 @@ services:
         labels:
             - traefik.backend=traefik
             - traefik.port=8080
-            - traefik.frontend.rule=Host:monitor.***REMOVED***
+            - traefik.frontend.rule=Host:monitor.${DOMAIN}
         volumes:
           - ./traefik/traefik.toml:/traefik.toml
           - ./traefik/acme.json:/acme.json
