@@ -1,2 +1,10 @@
+.env
 *.log
 traccar/logs/
+traccar/conf/traccar.xml
+traccar/web/favicon.ico
+traccar/web/icon.png
+traccar/web/logo.svg
+traccar/web/release.html
+traefik/acme.json
+traefik/traefik.toml
