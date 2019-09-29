@@ -15,7 +15,8 @@ services:
         ports:
             - "3306:3306"
         labels:
-            - traefik.enable=false
+            - traefik.backend=db
+            - traefik.port=3306
     traccar:
         image: traccar/traccar:4.6
         container_name: traccar
