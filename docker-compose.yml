@@ -15,8 +15,7 @@ services:
         ports:
             - "3306:3306"
         labels:
-            - traefik.backend=db
-            - traefik.port=3306
+            - traefik.enable=false
     traccar:
         image: traccar/traccar:4.6
         container_name: traccar
@@ -31,7 +30,6 @@ services:
             - ./traccar/web/logo.svg:/opt/traccar/web/logo.svg:ro
             - ./traccar/web/release.html:/opt/traccar/web/release.html:ro
         ports:
-            - "8082:8082"
             - "5000-5150:5000-5150"
         labels:
             - traefik.frontend.rule=Host:${DOMAIN},www.${DOMAIN}
