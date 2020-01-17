@@ -1,0 +1,21 @@
+#!/bin/sh
+
+BACKUP_FOLDER=/opt/mysql/backup
+NOW=$(date +'%Y-%m-%dT%H%M%SZ')
+
+MYSQLDUMP=$(which mysqldump)
+GZIP=$(which gzip)
+LS=$(which ls)
+GREP=$(which grep)
+TAIL=$(which tail)
+XARGS=$(which xargs)
+RM=$(which rm)
+
+TAIL_SIZE=$(($HIST_SIZE+1))
+
+[ ! -d $BACKUP_FOLDER ] && mkdir --parents $BACKUP_FOLDER
+
+FILE=$BACKUP_FOLDER/backup-$MYSQL_DATABASE-$NOW.sql.gz
+$MYSQLDUMP -h $MYSQL_CONTAINER_NAME -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE | $GZIP -9 > $FILE
+
+$LS -tp $BACKUP_FOLDER/ | $GREP -v '/$' | $TAIL -n +$TAIL_SIZE | $XARGS -I {} $RM -- $BACKUP_FOLDER/{}

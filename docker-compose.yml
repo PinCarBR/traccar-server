@@ -10,12 +10,32 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
         volumes:
+            - /etc/localtime:/etc/localtime:ro
             - db-datavolume:/var/lib/mysql
             - ./mysql:/etc/mysql/conf.d
         ports:
             - "3306:3306"
         labels:
             - traefik.enable=false
+    db_autobackup:
+        build:
+            context: ./mysqlautobkp
+            args:
+                FREQUENCY: weekly
+        image: mysql-auto-bkp:latest
+        container_name: db_autobackup
+        environment:
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_CONTAINER_NAME: db
+            HIST_SIZE: 10
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /opt/mysql/backup:/opt/mysql/backup
+        command: crond -f -d 8
+        restart: always
     traccar:
         image: traccar/traccar:4.6
         container_name: traccar
