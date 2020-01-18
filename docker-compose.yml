@@ -21,7 +21,7 @@ services:
         build:
             context: ./mysqlautobkp
             args:
-                FREQUENCY: weekly
+                FREQUENCY: ${MYSQL_BKP_FREQUENCY}
         image: mysql-auto-bkp:latest
         container_name: db_autobackup
         environment:
@@ -30,10 +30,10 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_CONTAINER_NAME: db
-            HIST_SIZE: 10
+            HIST_SIZE: ${MYSQL_BKP_HIST_SIZE}
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - /opt/mysql/backup:/opt/mysql/backup
+            - ${MYSQL_BACKUP_LOCATION}:/opt/mysql/backup
         command: crond -f -d 8
         restart: always
     traccar:

@@ -86,11 +86,11 @@ docker-ce:
 `docker exec -i db sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"' < ~/backup.sql`
 
 ### Database auto backup
-1. There is an automatic backup service that will backup the database every week per standard 
-2. If you want to change the backup frequency, just change the `FREQUENCY` parameter inside the auto backup service in the docker-compose file
+1. There is an automatic backup service that will backup the database on a given frequency
+2. If you want to change the backup frequency, just change the `FREQUENCY` parameter inside .env file
 3. The following options are available: `15min`, `hourly`, `daily`, `weekly` and `monthly`
 4. If you have any issues to execute the backup due to `Authentication plugin 'caching_sha2_password' cannot be loaded` error, please run the following command on the MySQL database: `ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'your_root_password';`
-5. The maximum historic size of backup files is given by the env variable `HIST_SIZE` in the docker-compose file, adjust it to your needs
+5. The maximum historic size of backup files is given by the env variable `HIST_SIZE`, adjust it to your needs
 
 ### Execute all the services
 `docker-compose up -d` or `docker-compose up -d --build --force-recreate` to force recreation of image and container  
