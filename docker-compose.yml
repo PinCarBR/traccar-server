@@ -17,25 +17,6 @@ services:
             - "3306:3306"
         labels:
             - traefik.enable=false
-    db_autobackup:
-        build:
-            context: ./mysqlautobkp
-            args:
-                FREQUENCY: ${MYSQL_BKP_FREQUENCY}
-        image: mysql-auto-bkp:latest
-        container_name: db_autobackup
-        environment:
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_CONTAINER_NAME: db
-            HIST_SIZE: ${MYSQL_BKP_HIST_SIZE}
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - ${MYSQL_BACKUP_LOCATION}:/opt/mysql/backup
-        command: crond -f -d 8
-        restart: always
     traccar:
         image: traccar/traccar:4.6
         container_name: traccar
