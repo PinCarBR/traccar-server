@@ -28,6 +28,7 @@ services:
             - ./traccar/web/release.html:/opt/traccar/web/release.html:ro
         ports:
             - "5000-5150:5000-5150"
+            - "8082:8082"
         labels:
             - traefik.frontend.rule=Host:web.${DOMAIN}
             - traefik.backend=traccar
@@ -39,6 +40,7 @@ services:
         ports:
           - "80:80"
           - "443:443"
+          - "8080:8080"
         labels:
             - traefik.backend=traefik
             - traefik.port=8080
