@@ -35,7 +35,6 @@ services:
     rev-proxy:
         image: traefik:1.7
         container_name: rev-proxy
-        command: --docker
         restart: always
         ports:
           - "80:80"

@@ -6,3 +6,5 @@ address = ":8080"
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+
+[docker]
