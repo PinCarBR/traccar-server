@@ -4,11 +4,7 @@ services:
         image: mysql:8.0.13
         container_name: db
         restart: always
-        environment:
-            MYSQL_USER: ${MYSQL_USER} 
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
+        env_file: .env
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - db-datavolume:/var/lib/mysql
