@@ -14,7 +14,7 @@ services:
         labels:
             - traefik.enable=false
     traccar:
-        image: traccar/traccar:4.6
+        image: traccar/traccar:4.8-alpine
         container_name: traccar
         depends_on:
             - db
