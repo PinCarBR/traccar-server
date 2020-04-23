@@ -33,9 +33,9 @@ services:
             - traefik.frontend.rule=Host:web.${DOMAIN}
             - traefik.backend=traccar
             - traefik.port=8082
-    rev-proxy:
+    rev_proxy:
         image: traefik:1.7
-        container_name: rev-proxy
+        container_name: rev_proxy
         restart: always
         ports:
           - "80:80"
