@@ -1,7 +1,9 @@
 .env
 *.log
+.DS_Store
 traccar/logs/
 traccar/conf/traccar.xml
+traccar/web/app.css
 traccar/web/favicon.ico
 traccar/web/icon.png
 traccar/web/logo.svg
