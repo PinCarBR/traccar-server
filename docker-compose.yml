@@ -31,11 +31,10 @@ services:
             - "5000-5150:5000-5150"
             - "8082:8082"
         labels:
-            - traefik.frontend.rule=Host:web.${DOMAIN}
-            - traefik.backend=traccar
-            - traefik.port=8082
+            - traefik.http.routers.traccar.rule=Host(`web.${DOMAIN}`)
+            - traefik.http.services.traccar_web.loadbalancer.server.port=8082
     rev_proxy:
-        image: traefik:1.7
+        image: traefik:v2.2
         container_name: rev_proxy
         restart: always
         ports:
@@ -43,9 +42,10 @@ services:
           - "443:443"
           - "8080:8080"
         labels:
-            - traefik.backend=traefik
-            - traefik.port=8080
-            - traefik.frontend.rule=Host:proxy.${DOMAIN}
+          - traefik.http.routers.api.rule=Host(`proxy.${DOMAIN}`)
+          - traefik.http.routers.api.service=api@internal
+          - traefik.http.routers.api.middlewares=auth
+          - traefik.http.middlewares.auth.basicauth.users=${AUTH_USER_PASSWORD}
         volumes:
           - ./traefik/traefik.toml:/traefik.toml
           - ./traefik/acme.json:/acme.json

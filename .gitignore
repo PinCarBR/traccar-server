@@ -10,3 +10,4 @@ traccar/web/logo.svg
 traccar/web/release.html
 traefik/acme.json
 traefik/traefik.toml
+traefik/traefik_https.toml

@@ -1,10 +1,5 @@
-defaultEntryPoints = ["http"]
-[web]
-address = ":8080"
-  [web.auth.basic]
-  users = ["admin:$apr1$r2oHWlaX$5KTrlguMNLiQFNjgvAy8f."]
-[entryPoints]
-  [entryPoints.http]
-  address = ":80"
+[api]
+  dashboard = true
 
-[docker]
+[providers.docker]
+
