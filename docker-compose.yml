@@ -37,6 +37,7 @@ services:
         image: traefik:v2.2
         container_name: rev_proxy
         restart: always
+        env_file: .env
         ports:
           - "80:80"
           - "443:443"
