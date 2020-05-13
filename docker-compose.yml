@@ -21,7 +21,7 @@ services:
         restart: always
         volumes:
             - ./traccar/conf/traccar.xml:/opt/traccar/conf/traccar.xml:ro
-            - ./traccar/logs:/opt/traccar/logs:rw
+            - /var/log/traccar:/opt/traccar/logs:rw
             - ./traccar/web/favicon.ico:/opt/traccar/web/favicon.ico:ro
             - ./traccar/web/icon.png:/opt/traccar/web/icon.png:ro
             - ./traccar/web/logo.svg:/opt/traccar/web/logo.svg:ro
