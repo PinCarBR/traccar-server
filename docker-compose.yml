@@ -27,6 +27,7 @@ services:
             - ./traccar/web/logo.svg:/opt/traccar/web/logo.svg:ro
             - ./traccar/web/release.html:/opt/traccar/web/release.html:ro
             - ./traccar/web/app.css:/opt/traccar/web/app.css:ro
+            - ./traccar/templates:/opt/traccar/templates:ro
         ports:
             - "5000-5150:5000-5150"
             - "8082:8082"
