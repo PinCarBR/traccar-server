@@ -56,6 +56,14 @@ docker-ce:
 2. Alternatively you can set all these variables in `.env` file and export all at once on the system startup by adding the following command to your .bashrc:  
 `export $(<PATH_TO_THE_REPOSITORY/.env)`
 
+### Customize your volumes in the `docker-compose.yml` file according to the customization you want to have
+1. Set your mysql username and password parameters as environment variables:  
+`export MYSQL_USER=YOUR_USERNAME` `export MYSQL_ROOT_PASSWORD=YOUR_ROOT_PASSWORD` `export MYSQL_PASSWORD=YOUR_USER_PASSWORD` `export MYSQL_DATABASE=YOUR_DATABASE_NAME`
+2. Set your domain:  
+`export DOMAIN=YOUR_DOMAIN.com`
+2. Alternatively you can set all these variables in `.env` file and export all at once on the system startup by adding the following command to your .bashrc:  
+`export $(<PATH_TO_THE_REPOSITORY/.env)`
+
 ### Create the traccar configuration file
 1. Create a `traccar.xml` file with your configuration inside the folder `traccar/conf/`
 1. A sample configuration file is provided on `traccar/conf/sample_traccar.xml`
@@ -84,6 +92,9 @@ docker-ce:
 `docker-compose logs`
 3. Transfer the last backup to the database:  
 `docker exec -i db sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"' < ~/backup.sql`
+
+### Aditional customization
+1. Customize your volumes in the `docker-compose.yml` file according to the customization you want to have
 
 ### Execute all the services
 `docker-compose up -d` or `docker-compose up -d --build --force-recreate` to force recreation of image and container  
