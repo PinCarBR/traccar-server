@@ -29,6 +29,8 @@ services:
             - ./traccar/web/release.html:/opt/traccar/web/release.html:ro
             - ./traccar/web/app.css:/opt/traccar/web/app.css:ro
             - ./traccar/templates:/opt/traccar/templates:ro
+            - ./traccar/web/app.min.js:/opt/traccar/web/app.min.js:ro
+            - ./traccar/web/l10n/en.json:/opt/traccar/web/l10n/en.json:ro
         ports:
             - "5000-5150:5000-5150"
             - "8082:8082"

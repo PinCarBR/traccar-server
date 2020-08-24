@@ -5,6 +5,7 @@ traccar/logs/
 traccar/conf/traccar.xml
 traccar/conf/debug.xml
 traccar/web/app.css
+traccar/web/app.min.js
 traccar/web/favicon.ico
 traccar/web/icon.png
 traccar/web/logo.svg
