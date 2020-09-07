@@ -10,6 +10,7 @@ traccar/web/favicon.ico
 traccar/web/icon.png
 traccar/web/logo.svg
 traccar/web/release.html
+traccar/web/l10n/
 traefik/acme.json
 traefik/traefik.toml
 traefik/traefik_https.toml
