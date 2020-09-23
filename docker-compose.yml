@@ -49,12 +49,28 @@ services:
         labels:
           - traefik.http.routers.api.rule=Host(`proxy.${DOMAIN}`)
           - traefik.http.routers.api.service=api@internal
-          - traefik.http.routers.api.middlewares=auth
-          - traefik.http.middlewares.auth.basicauth.users=${AUTH_USER_PASSWORD}
+          - traefik.http.routers.api.middlewares=traefik-forward-auth
         volumes:
           - ./traefik/traefik.toml:/traefik.toml
           - ./traefik/acme.json:/acme.json
           - /var/log/traefik:/logs
           - /var/run/docker.sock:/var/run/docker.sock
+
+    traefik-forward-auth:
+        image: thomseddon/traefik-forward-auth:2
+        container_name: traefik_forward_auth
+        restart: always
+        environment:
+        - DEFAULT_PROVIDER=${DEFAULT_PROVIDER}
+        - PROVIDERS_OIDC_ISSUER_URL=${PROVIDERS_OIDC_ISSUER_URL}
+        - PROVIDERS_OIDC_CLIENT_ID=${PROVIDERS_OIDC_CLIENT_ID}
+        - PROVIDERS_OIDC_CLIENT_SECRET=${PROVIDERS_OIDC_CLIENT_SECRET}
+        - SECRET=${SECRET}
+        - INSECURE_COOKIE=true
+        - LOG_LEVEL=error
+        labels:
+        - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
+        - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
+        - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
 volumes:
     db-datavolume:
