@@ -1,5 +1,0 @@
-[api]
-  dashboard = true
-
-[providers.docker]
-

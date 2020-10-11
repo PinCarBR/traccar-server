@@ -15,22 +15,19 @@ services:
         labels:
             - traefik.enable=false
     traccar:
-        image: traccar/traccar:4.10-alpine
+        image: openjdk:8-jre-alpine
         container_name: traccar
         depends_on:
             - db
         restart: always
         volumes:
-            - ./traccar/conf/traccar.xml:/opt/traccar/conf/traccar.xml:ro
+            - ./traccar/conf:/opt/traccar/conf:ro
+            - ./traccar/lib:/opt/traccar/lib:ro
             - /var/log/traccar:/opt/traccar/logs:rw
-            - ./traccar/web/favicon.ico:/opt/traccar/web/favicon.ico:ro
-            - ./traccar/web/icon.png:/opt/traccar/web/icon.png:ro
-            - ./traccar/web/logo.svg:/opt/traccar/web/logo.svg:ro
-            - ./traccar/web/release.html:/opt/traccar/web/release.html:ro
-            - ./traccar/web/app.css:/opt/traccar/web/app.css:ro
+            - ./traccar/schema:/opt/traccar/schema:ro
             - ./traccar/templates:/opt/traccar/templates:ro
-            - ./traccar/web/app.min.js:/opt/traccar/web/app.min.js:ro
-            - ./traccar/web/l10n/en.json:/opt/traccar/web/l10n/en.json:ro
+            - ./traccar/web:/opt/traccar/web:ro
+            - ./traccar/tracker-server.jar:/opt/traccar/tracker-server.jar:ro
         ports:
             - "5000-5150:5000-5150"
             - "8082:8082"
