@@ -3,3 +3,4 @@
 .DS_Store
 traccar/
 traefik/
+keyfile.json
