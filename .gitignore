@@ -3,4 +3,5 @@
 .DS_Store
 traccar/
 traefik/
+mysql/
 keyfile.json

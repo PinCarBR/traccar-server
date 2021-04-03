@@ -1,7 +1,7 @@
 version: "3"
 services:
     db:
-        image: mysql:8.0.13
+        image: mysql:8.0.20
         container_name: db
         command: --default-authentication-plugin=mysql_native_password
         restart: always
@@ -10,6 +10,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - db-datavolume:/var/lib/mysql
             - ./mysql:/etc/mysql/conf.d
+            - ${MYSQL_BACKUP_LOCATION}:/opt/mysql/backup
         ports:
             - "3306:3306"
         labels:
